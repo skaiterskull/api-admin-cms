@@ -1,0 +1,16 @@
+# User api list
+
+### Create an user
+POST http://localhost:8000/api/v1/user
+Content-Type: application/json
+
+{
+    "fname": "Hendra",
+    "lname": "Wijaya",
+    "dob": "2021-10-10",
+    "email": "hendraa@yahoo.com",
+    "password": "dasdsahra",
+    "phone": "012345678",
+    "address": "Sydney",
+    "gender":"Male"
+}
