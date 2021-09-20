@@ -17,6 +17,7 @@ All the api will follow the following path `${rootUrl/api/v1}` ie. http://localh
 
 All user api will follow the following endpoint `${rootUrl/api/v1/user}`
 
-| #   | API | METHOD | DESCRIPTION                                                                 |
-| --- | --- | ------ | --------------------------------------------------------------------------- |
-| 1   | `/` | POST   | Expect the user info object and create user in DB and return status message |
+| #   | API                   | METHOD | DESCRIPTION                                                                 |
+| --- | --------------------- | ------ | --------------------------------------------------------------------------- |
+| 1   | `/`                   | POST   | Expect the user info object and create user in DB and return status message |
+| 1   | `/email-verification` | POST   | Expect the user info object and check if the link valid                     |

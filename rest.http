@@ -8,9 +8,19 @@ Content-Type: application/json
     "fname": "Hendra",
     "lname": "Wijaya",
     "dob": "2021-10-10",
-    "email": "hendraa@yahoo.com",
-    "password": "dasdsahra",
+    "email": "test@yahoo.com",
+    "password": "aaaaaaa",
     "phone": "012345678",
     "address": "Sydney",
     "gender":"Male"
 }
+
+### Email verification api 
+POST http://localhost:8000/api/v1/user/email-verification
+Content-Type: application/json
+
+{
+    "otp": "21247706",
+    "email" : "test@yahoo.com"
+}
+
