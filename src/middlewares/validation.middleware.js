@@ -7,12 +7,12 @@ export const newUserformValidaton = (req, res, next) => {
   const schema = Joi.object({
     fname: shortStr,
     lname: shortStr,
-    dob: Joi.date(),
+    dob: Joi.date().allow('').allow(null),
     email,
     password: Joi.string().min(6).max(50).required(),
-    phone: Joi.string().max(15),
-    address: Joi.string().max(50),
-    gender: Joi.string().max(6),
+    phone: Joi.string().allow('').max(15),
+    address: Joi.string().allow('').max(50),
+    gender: Joi.string().allow('').max(6),
   })
 
   const result = schema.validate(req.body)
@@ -20,8 +20,7 @@ export const newUserformValidaton = (req, res, next) => {
   if (result.error) {
     return res.json({
       status: 'Error',
-      message:
-        'Data validation is failed, can not proceed to register the user',
+      message: result.error.message,
     })
   }
   next()

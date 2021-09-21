@@ -20,7 +20,7 @@ POST http://localhost:8000/api/v1/user/email-verification
 Content-Type: application/json
 
 {
-    "otp": "21247706",
+    "otp": "29336820",
     "email" : "test@yahoo.com"
 }
 

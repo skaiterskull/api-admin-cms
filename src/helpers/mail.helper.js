@@ -17,7 +17,7 @@ const send = async (mailInfo) => {
 }
 
 export const emailProcesser = ({ email, otp }) => {
-  const link = `${process.env.ROOT_URL}?otp=${otp}&email${email}`
+  const link = `${process.env.CLIENT_ROOT_URL}/email-verification?otp=${otp}&email=${email}`
   const mailObj = {
     from: `E-shop 👻 <${process.env.EMAIL_USER}>`, // sender address
     to: email, // list of receivers
