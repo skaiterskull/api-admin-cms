@@ -4,16 +4,17 @@ import slugify from 'slugify'
 import {
   createCategory,
   deleteCategory,
+  getCategory,
 } from '../models/category/Category.model.js'
 import { newCategoryValidation } from '../middlewares/validation.middleware.js'
 
-Router.all('/', newCategoryValidation, (req, res, next) => {
+Router.all('/', (req, res, next) => {
   console.log('You have reached category API')
   next()
 })
 
 //Create Category
-Router.post('/', async (req, res) => {
+Router.post('/', newCategoryValidation, async (req, res) => {
   try {
     const { name, parentCat } = req.body
     // slugify
@@ -21,7 +22,7 @@ Router.post('/', async (req, res) => {
     const newCat = {
       name,
       slug,
-      parentCat,
+      parentCat: parentCat ? parentCat : null,
     }
 
     //insert into database
@@ -44,7 +45,7 @@ Router.post('/', async (req, res) => {
     if (error.message.includes('E11000')) {
       msg = 'Category is already exist'
     }
-    res.status(500).json({
+    res.json({
       status: 'Error',
       message: msg,
     })
@@ -77,4 +78,21 @@ Router.delete('/:_id?', async (req, res) => {
   }
 })
 
+//Fetch Category
+Router.get('/', async (req, res) => {
+  try {
+    const result = await getCategory()
+    res.json({
+      status: 'Success',
+      message: 'Request success',
+      result,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      status: 'Error',
+      message: 'Unable to process your request',
+    })
+  }
+})
 export default Router

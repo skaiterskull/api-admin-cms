@@ -7,3 +7,7 @@ export const createCategory = (newCat) => {
 export const deleteCategory = (_id) => {
   return CategorySchema.findByIdAndDelete(_id)
 }
+
+export const getCategory = () => {
+  return CategorySchema.find()
+}

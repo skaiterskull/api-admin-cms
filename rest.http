@@ -31,15 +31,13 @@ POST http://localhost:8000/api/v1/category
 Content-Type: application/json
 
 {
- "name" : "Kitchen Ware",
+ "name" : "Electric Vehicle ",
  "parentCat" : null
 }
 
 ### Fetch all category/s 
-Get http://localhost:8000/api/v1/category
-Content-Type: application/json
+GET http://localhost:8000/api/v1/category
 
-{}
 
 ### Delete category
 Delete http://localhost:8000/api/v1/category
