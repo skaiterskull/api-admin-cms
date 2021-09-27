@@ -16,6 +16,7 @@ Router.all('/', (req, res, next) => {
 //Create Category
 Router.post('/', newCategoryValidation, async (req, res) => {
   try {
+    console.log(req.body)
     const { name, parentCat } = req.body
     // slugify
     const slug = slugify(name, { lower: true })
