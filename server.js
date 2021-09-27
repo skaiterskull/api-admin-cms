@@ -21,7 +21,9 @@ mongoClient()
 
 //Routers
 import userRouter from './src/routers/userRouter.js'
+import categoryUser from './src/routers/categoryRouter.js'
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1/category', categoryUser)
 
 app.use('/', (req, res) => {
   res.send('You have reached the end of the router list')

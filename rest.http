@@ -1,4 +1,4 @@
-# User api list
+#################################### User api list
 
 ### Create an user
 POST http://localhost:8000/api/v1/user
@@ -24,3 +24,26 @@ Content-Type: application/json
     "email" : "test@yahoo.com"
 }
 
+#################################### Category api list
+
+### Create new category
+POST http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+ "name" : "Kitchen Ware",
+ "parentCat" : null
+}
+
+### Fetch all category/s 
+Get http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{}
+
+### Delete category
+Delete http://localhost:8000/api/v1/category
+
+
+
+### Update category
