@@ -5,8 +5,12 @@ import {
   createCategory,
   deleteCategory,
   getCategory,
+  updateCategory,
 } from '../models/category/Category.model.js'
-import { newCategoryValidation } from '../middlewares/validation.middleware.js'
+import {
+  newCategoryValidation,
+  updateCategoryValidation,
+} from '../middlewares/validation.middleware.js'
 
 Router.all('/', (req, res, next) => {
   console.log('You have reached category API')
@@ -73,6 +77,30 @@ Router.delete('/:_id?', async (req, res) => {
   } catch (error) {
     console.log(error)
     res.status(500).json({
+      status: 'Error',
+      message: "Unable to process your request'",
+    })
+  }
+})
+
+Router.patch('/', updateCategoryValidation, async (req, res) => {
+  try {
+    const { parentCat } = req.body
+    req.body.parentCat = parentCat ? parentCat : null
+    const result = await updateCategory(req.body)
+    if (result?._id) {
+      return res.json({
+        status: 'Success',
+        message: 'Category has been updated',
+      })
+    }
+    res.json({
+      status: 'Error',
+      message: 'Unable to update category, please try again later',
+    })
+  } catch (error) {
+    console.log(error)
+    res.json({
       status: 'Error',
       message: "Unable to process your request'",
     })
