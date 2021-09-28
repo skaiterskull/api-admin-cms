@@ -1,4 +1,4 @@
-# User api list
+#################################### User api list
 
 ### Create an user
 POST http://localhost:8000/api/v1/user
@@ -24,3 +24,31 @@ Content-Type: application/json
     "email" : "test@yahoo.com"
 }
 
+#################################### Category api list
+
+### Create new category
+POST http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+ "name" : "Electric Vehicle ",
+ "parentCat" : null
+}
+
+### Fetch all category/s 
+GET http://localhost:8000/api/v1/category
+
+
+### Delete category
+Delete http://localhost:8000/api/v1/category
+
+
+### Update category
+PATCH  http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+ "_id": "61525b4412ec817bb1a6cb44",
+ "name" : "Electric Vehicle 2 ",
+ "parentCat" : ""
+}
