@@ -11,3 +11,11 @@ export const activeUser = (email) => {
     { new: true }
   )
 }
+
+export const getUserByEMail = (email) => {
+  return UserSchema.findOne({ email })
+}
+
+export const setRefreshJWT = (_id, refreshJWT) => {
+  return UserSchema.findByIdAndUpdate(_id, { refreshJWT })
+}
