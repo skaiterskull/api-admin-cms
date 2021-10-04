@@ -61,3 +61,11 @@ Content-Type: application/json
  "name" : "Electric Vehicle 2 ",
  "parentCat" : ""
 }
+
+###Delete category 
+DELETE http://localhost:8000/api/v1/category/fdasgrwg436346rsg
+
+#################################### Token api 
+
+GET http://localhost:8000/api/v1/token
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzM4NDEzOCwiZXhwIjoxNjM1OTc2MTM4fQ.mTLLPnC9BCbv6RtmIT40n8caF87gBUqreJ60jfdkkKs
