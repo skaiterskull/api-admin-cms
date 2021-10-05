@@ -23,8 +23,10 @@ mongoClient()
 import userRouter from './src/routers/userRouter.js'
 import categoryUser from './src/routers/categoryRouter.js'
 import tokenRouter from './src/routers/tokenRouter.js'
+import { isAdminAuth } from './src/middlewares/auth.middleware.js'
+
 app.use('/api/v1/user', userRouter)
-app.use('/api/v1/category', categoryUser)
+app.use('/api/v1/category', isAdminAuth, categoryUser)
 app.use('/api/v1/token', tokenRouter)
 
 app.use('/', (req, res) => {
