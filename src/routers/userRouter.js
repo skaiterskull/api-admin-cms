@@ -1,6 +1,10 @@
 import express from 'express'
 const Router = express.Router()
-import { createUser, activeUser } from '../models/user/User.model.js'
+import {
+  createUser,
+  activeUser,
+  getUserByEMail,
+} from '../models/user/User.model.js'
 import {
   createUniqueReset,
   findUniqueReset,
@@ -9,13 +13,15 @@ import {
 import {
   newUserformValidaton,
   emailVerificationValidation,
+  adminLoginValidation,
 } from '../middlewares/validation.middleware.js'
-import { hashPassword } from '../helpers/bcrypt.js'
+import { hashPassword, verifyPassword } from '../helpers/bcrypt.js'
 import { getRandomOTP } from '../helpers/otp.helper.js'
 import {
   emailProcesser,
   emailVerificationWelcome,
 } from '../helpers/mail.helper.js'
+import { getJWTs } from '../helpers/jwt.helper.js'
 
 Router.all('/', (req, res, next) => {
   console.log('You have reached userAPI')
@@ -97,8 +103,38 @@ Router.post(
     }
   }
 )
-// Router.get()
-// Router.patch()
-// Router.delete()
+
+Router.post('/login', adminLoginValidation, async (req, res) => {
+  try {
+    const { email, password } = req.body
+    //find user by email
+    const user = await getUserByEMail(email)
+    if (user?._id) {
+      //verify password
+      const passMatched = verifyPassword(password, user.password)
+      if (passMatched) {
+        user.password = undefined
+        const tokens = await getJWTs({ _id: user._id, email })
+        return res.json({
+          status: 'Success',
+          message: 'Login Successful',
+          user,
+          tokens,
+        })
+      }
+    }
+    res.json({
+      status: 'Error',
+      message: 'Invalid Login details',
+    })
+    //login success
+  } catch (error) {
+    console.log(error)
+    res.json({
+      status: 'Error',
+      message: 'Unable to process your request, please contact administrator',
+    })
+  }
+})
 
 export default Router

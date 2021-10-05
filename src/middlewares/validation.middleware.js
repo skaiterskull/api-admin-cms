@@ -75,3 +75,20 @@ export const updateCategoryValidation = (req, res, next) => {
   }
   next()
 }
+
+export const adminLoginValidation = (req, res, next) => {
+  const schema = Joi.object({
+    email,
+    password: Joi.string().min(6).max(50).required(),
+  })
+
+  const result = schema.validate(req.body)
+
+  if (result.error) {
+    return res.json({
+      status: 'Error',
+      message: result.error.message,
+    })
+  }
+  next()
+}
