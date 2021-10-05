@@ -46,7 +46,7 @@ Content-Type: application/json
 
 ### Fetch all category/s 
 GET http://localhost:8000/api/v1/category
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzM5ODI1NywiZXhwIjoxNjMzMzk5MTU3fQ.QbG9jExhZ1oEWjHq1CE1bBUVuX31JqhHLkhOmpkaI74
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzQ3MDQwNiwiZXhwIjoxNjMzNDcxMzA2fQ.-SqyA5jvvRuPIDP1sYz5yS8rlfRNtbxHhkTy3ANG-sM
 
 
 ### Delete category
