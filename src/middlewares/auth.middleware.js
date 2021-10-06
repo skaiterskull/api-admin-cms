@@ -21,6 +21,7 @@ export const isAdminAuth = async (req, res, next) => {
         if (session?._id) {
           const user = await getUserById(session.userId)
           if (user?.role === 'admin') {
+            req.user = user
             return next()
           }
         }

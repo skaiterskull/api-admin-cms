@@ -15,6 +15,7 @@ import {
   emailVerificationValidation,
   adminLoginValidation,
 } from '../middlewares/validation.middleware.js'
+import { isAdminAuth } from '../middlewares/auth.middleware.js'
 import { hashPassword, verifyPassword } from '../helpers/bcrypt.js'
 import { getRandomOTP } from '../helpers/otp.helper.js'
 import {
@@ -23,9 +24,22 @@ import {
 } from '../helpers/mail.helper.js'
 import { getJWTs } from '../helpers/jwt.helper.js'
 
-Router.all('/', (req, res, next) => {
-  console.log('You have reached userAPI')
-  next()
+Router.get('/', isAdminAuth, (req, res) => {
+  const user = req.user
+  user.refreshJWT = undefined
+  user.password = undefined
+  try {
+    res.json({
+      status: 'Success',
+      message: 'User Profile',
+      user,
+    })
+  } catch (error) {
+    res.status(500).json({
+      status: 'Error',
+      message: 'Internal server error',
+    })
+  }
 })
 
 Router.post('/', newUserformValidaton, async (req, res) => {
