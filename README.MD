@@ -22,6 +22,8 @@ All user api will follow the following endpoint `${rootUrl/api/v1/user}`
 | 1   | `/`                   | POST   | Expect the user info object and create user in DB and return status message |
 | 2   | `/email-verification` | POST   | Expect the user info object and check if the link valid                     |
 | 3   | `/login`              | POST   | Expect an user info {email, password} and proceed to private route          |
+| 4   | `/`                   | PUT    | Expect an user info object and then update it on database                   |
+| 5   | `/`                   | PATCH  | Expect an current password and new password to update the password          |
 
 ### Category API
 

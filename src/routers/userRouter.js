@@ -4,6 +4,7 @@ import {
   createUser,
   activeUser,
   getUserByEMail,
+  updateUserById,
 } from '../models/user/User.model.js'
 import {
   createUniqueReset,
@@ -14,6 +15,8 @@ import {
   newUserformValidaton,
   emailVerificationValidation,
   adminLoginValidation,
+  updateUserformValidaton,
+  updatePasswordformValidaton,
 } from '../middlewares/validation.middleware.js'
 import { isAdminAuth } from '../middlewares/auth.middleware.js'
 import { hashPassword, verifyPassword } from '../helpers/bcrypt.js'
@@ -21,6 +24,8 @@ import { getRandomOTP } from '../helpers/otp.helper.js'
 import {
   emailProcesser,
   emailVerificationWelcome,
+  userProfileUpdateNotification,
+  userPasswordUpdateNotification,
 } from '../helpers/mail.helper.js'
 import { getJWTs } from '../helpers/jwt.helper.js'
 
@@ -151,4 +156,75 @@ Router.post('/login', adminLoginValidation, async (req, res) => {
   }
 })
 
+Router.put('/', isAdminAuth, updateUserformValidaton, async (req, res) => {
+  try {
+    const { _id, email } = req.user
+    const result = await updateUserById(_id, req.body)
+
+    if (result?._id) {
+      if (result?._id) {
+        userProfileUpdateNotification(email)
+        //todo update user with email notif
+        return res.json({
+          status: 'Success',
+          message: 'You profile has been updated',
+        })
+      }
+
+      res.json({
+        status: 'Error',
+        message: 'Unable to process your request, please try again later.',
+        result,
+      })
+    }
+  } catch (error) {
+    console.log(error.message)
+    res.json({
+      status: 'Error',
+      message: 'Unable to process your request, please contact administrator.',
+    })
+  }
+})
+
+Router.patch(
+  '/',
+  isAdminAuth,
+  updatePasswordformValidaton,
+  async (req, res) => {
+    try {
+      const { _id, email } = req.user
+      const { password, currentPassword } = req.body
+      //check current password against the one in database
+      const isMatched = verifyPassword(currentPassword, req.user.password)
+      if (isMatched) {
+        //encrypt the password
+        const hashedPass = hashPassword(password)
+        //update database
+        const result = hashedPass
+          ? await updateUserById(_id, { password: hashedPass })
+          : null
+        //send email
+        if (result?._id) {
+          userPasswordUpdateNotification(email)
+          //todo update user with email notif
+          return res.json({
+            status: 'Success',
+            message: 'You password has been updated',
+          })
+        }
+      }
+      res.json({
+        status: 'Error',
+        message: 'Unable to process your request, please try again later.',
+      })
+    } catch (error) {
+      console.log(error.message)
+      res.json({
+        status: 'Error',
+        message:
+          'Unable to process your request, please contact administrator.',
+      })
+    }
+  }
+)
 export default Router

@@ -7,9 +7,9 @@ export const isAdminAuth = async (req, res, next) => {
     const { authorization } = req.headers
     if (authorization) {
       const decoded = verifyAccessJWT(authorization)
-      console.log(decoded)
       if (decoded === 'jwt expired') {
-        return res.status(403).json({
+        console.log(decoded)
+        return res.json({
           status: 'error',
           message: 'JWT expired',
         })

@@ -15,6 +15,30 @@ Content-Type: application/json
     "gender":"Male"
 }
 
+### Update  user
+PUT http://localhost:8000/api/v1/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzkwMTQzMCwiZXhwIjoxNjMzOTAyMzMwfQ.2Kj75w-rfOm4unhHC_-FeQnVHfPTlADxA9N_xfTWe1c
+
+{
+    "fname": "Hendra1",
+    "lname": "Wijaya",
+    "dob": "2021-10-10",
+    "phone": "012345678",
+    "address": "Sydney",
+    "gender":"Male"
+}
+
+### Update password
+PATCH  http://localhost:8000/api/v1/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzkxMTI4NywiZXhwIjoxNjMzOTEyMTg3fQ.G2SUXn0l3W1EulyNlLneoLVKMHg_SnSUVH3BjAE0VTk
+
+{
+    "password": "1234567",
+    "currentPassword":"123456"
+}
+
 ### Email verification api 
 POST http://localhost:8000/api/v1/user/email-verification
 Content-Type: application/json
