@@ -57,3 +57,63 @@ export const emailVerificationWelcome = (email) => {
 
   send(mailObj)
 }
+
+export const userProfileUpdateNotification = (email) => {
+  const mailObj = {
+    from: `E-shop 👻 <${process.env.EMAIL_USER}>`, // sender address
+    to: email, // list of receivers
+    subject: 'Profile update', // Subject line
+    text: `Hi there, your profile has been updated. If you did not make this change, please contact us immediately.`, // plain text body
+    html: `
+        Hello there,
+        <br/>
+        <p>Hi there, your profile has been updated. If you did not make this change, please contact us immediately.</p>
+
+        <p>Kind regards</p>
+        <br/>
+        <p>--Some company info</p>
+    `, // html body
+  }
+
+  send(mailObj)
+}
+
+export const userPasswordUpdateNotification = (email) => {
+  const mailObj = {
+    from: `E-shop 👻 <${process.env.EMAIL_USER}>`, // sender address
+    to: email, // list of receivers
+    subject: 'Password update', // Subject line
+    text: `Hi there, your password has been updated. If you did not make this change, please contact us immediately.`, // plain text body
+    html: `
+        Hello there,
+        <br/>
+        <p>Hi there, your password has been updated. If you did not make this change, please contact us immediately.</p>
+
+        <p>Kind regards</p>
+        <br/>
+        <p>--Some company info</p>
+    `, // html body
+  }
+
+  send(mailObj)
+}
+
+export const passwordResetOTPNotification = ({ email, otp }) => {
+  const mailObj = {
+    from: `E-shop 👻 <${process.env.EMAIL_USER}>`, // sender address
+    to: email, // list of receivers
+    subject: 'OTP for password reset', // Subject line
+    text: `Hi there, use the otp ${otp} to reset the password. The password will expire in x amount`, // plain text body
+    html: `
+        Hello there,
+        <br/>
+        <p>Hi there, use the otp ${otp} to reset the password. The password will expire in x amount</p>
+
+        <p>Kind regards</p>
+        <br/>
+        <p>--Some company info</p>
+    `, // html body
+  }
+
+  send(mailObj)
+}

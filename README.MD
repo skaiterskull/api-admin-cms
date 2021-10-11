@@ -22,6 +22,9 @@ All user api will follow the following endpoint `${rootUrl/api/v1/user}`
 | 1   | `/`                   | POST   | Expect the user info object and create user in DB and return status message |
 | 2   | `/email-verification` | POST   | Expect the user info object and check if the link valid                     |
 | 3   | `/login`              | POST   | Expect an user info {email, password} and proceed to private route          |
+| 4   | `/`                   | PUT    | Expect an user info object and then update it on database                   |
+| 5   | `/`                   | PATCH  | Expect an current password and new password to update the password          |
+| 6   | `/reset-password`     | PATCH  | Expect otp, new password, and email to reset password                       |
 
 ### Category API
 
@@ -41,3 +44,4 @@ All token api will follow the following endpoint `${rootUrl/api/v1/token}`
 | #   | API | METHOD | DESCRIPTION                                                                          |
 | --- | --- | ------ | ------------------------------------------------------------------------------------ |
 | 1   | `/` | GET    | Expect the Authorization data as headers from frontend for authorization of the user |
+| 2   | `/` | POST   | Expect an email and OTP will be sent to the email                                    |
