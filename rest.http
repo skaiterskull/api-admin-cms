@@ -39,6 +39,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJl
     "currentPassword":"123456"
 }
 
+### Reset password
+PATCH  http://localhost:8000/api/v1/user/reset-password
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzkxMTI4NywiZXhwIjoxNjMzOTEyMTg3fQ.G2SUXn0l3W1EulyNlLneoLVKMHg_SnSUVH3BjAE0VTk
+
+{
+    "email": "hendra.here@yahoo.com",
+    "otp" : "953034",
+    "password": "hendra"
+}
+
+
 ### Email verification api 
 POST http://localhost:8000/api/v1/user/email-verification
 Content-Type: application/json

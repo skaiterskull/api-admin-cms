@@ -5,6 +5,7 @@ import {
   activeUser,
   getUserByEMail,
   updateUserById,
+  updateUserByFilter,
 } from '../models/user/User.model.js'
 import {
   createUniqueReset,
@@ -17,6 +18,7 @@ import {
   adminLoginValidation,
   updateUserformValidaton,
   updatePasswordformValidaton,
+  resetPasswordformValidaton,
 } from '../middlewares/validation.middleware.js'
 import { isAdminAuth } from '../middlewares/auth.middleware.js'
 import { hashPassword, verifyPassword } from '../helpers/bcrypt.js'
@@ -29,6 +31,7 @@ import {
 } from '../helpers/mail.helper.js'
 import { getJWTs } from '../helpers/jwt.helper.js'
 
+//Get user profile information
 Router.get('/', isAdminAuth, (req, res) => {
   const user = req.user
   user.refreshJWT = undefined
@@ -47,6 +50,7 @@ Router.get('/', isAdminAuth, (req, res) => {
   }
 })
 
+//Create new user
 Router.post('/', newUserformValidaton, async (req, res) => {
   try {
     const hashPass = hashPassword(req.body.password)
@@ -65,10 +69,6 @@ Router.post('/', newUserformValidaton, async (req, res) => {
       if (data?._id) {
         emailProcesser(uniqueCombo)
       }
-      //---------------------------------------------------------
-      //send an email includes the OTP Unique PIN
-
-      //---------------------------------------------------------
 
       return res.json({
         status: 'Success',
@@ -91,6 +91,7 @@ Router.post('/', newUserformValidaton, async (req, res) => {
   }
 })
 
+//New user email verification
 Router.post(
   '/email-verification',
   emailVerificationValidation,
@@ -123,6 +124,7 @@ Router.post(
   }
 )
 
+//User login
 Router.post('/login', adminLoginValidation, async (req, res) => {
   try {
     const { email, password } = req.body
@@ -156,6 +158,7 @@ Router.post('/login', adminLoginValidation, async (req, res) => {
   }
 })
 
+//Update profile
 Router.put('/', isAdminAuth, updateUserformValidaton, async (req, res) => {
   try {
     const { _id, email } = req.user
@@ -186,6 +189,7 @@ Router.put('/', isAdminAuth, updateUserformValidaton, async (req, res) => {
   }
 })
 
+//Update Password
 Router.patch(
   '/',
   isAdminAuth,
@@ -227,4 +231,48 @@ Router.patch(
     }
   }
 )
+
+//Reset Password
+Router.patch(
+  '/reset-password',
+  resetPasswordformValidaton,
+  async (req, res) => {
+    try {
+      const { email, otp, password } = req.body
+      //check if the opt and email valid
+      const otpInfo = await findUniqueReset({ otp, email })
+      if (otpInfo?._id) {
+        //encrypt the password
+        const hashedPass = hashPassword(password)
+
+        //update password in the database
+        const filter = { email }
+        const obj = { password: hashedPass }
+        const user = await updateUserByFilter(filter, obj)
+        if (user?._id) {
+          //send email
+          userProfileUpdateNotification(email)
+          //remove the email and otp in the database
+          deleteUniqueReset({ otp, email })
+          return res.json({
+            status: 'Success',
+            message: 'Your password has been updated, you can sign in now.',
+          })
+        }
+      }
+
+      res.json({
+        status: 'Error',
+        message: 'Invalid request',
+      })
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({
+        status: 'Error',
+        message: 'Internal server error',
+      })
+    }
+  }
+)
+
 export default Router

@@ -8,8 +8,8 @@ export const findUniqueReset = (userInfo) => {
   return ResetPinSchema.findOne(userInfo)
 }
 
-export const deleteUniqueReset = async (userInfo) => {
-  const result = await ResetPinSchema.findOneAndDelete(userInfo)
+export const deleteUniqueReset = async (filter) => {
+  const result = await ResetPinSchema.findOneAndDelete(filter)
   return result
 }
 
