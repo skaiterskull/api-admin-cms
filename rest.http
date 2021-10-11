@@ -94,3 +94,12 @@ DELETE http://localhost:8000/api/v1/category/fdasgrwg436346rsg
 
 GET http://localhost:8000/api/v1/token
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTYzMzM4NDEzOCwiZXhwIjoxNjM1OTc2MTM4fQ.mTLLPnC9BCbv6RtmIT40n8caF87gBUqreJ60jfdkkKs
+
+
+### Send OTP for resetting password
+POST http://localhost:8000/api/v1/token/request-otp
+Content-Type: application/json
+
+{
+    "email": "hendra.here@yahoo.com"
+}

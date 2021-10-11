@@ -97,3 +97,23 @@ export const userPasswordUpdateNotification = (email) => {
 
   send(mailObj)
 }
+
+export const passwordResetOTPNotification = ({ email, otp }) => {
+  const mailObj = {
+    from: `E-shop 👻 <${process.env.EMAIL_USER}>`, // sender address
+    to: email, // list of receivers
+    subject: 'OTP for password reset', // Subject line
+    text: `Hi there, use the otp ${otp} to reset the password. The password will expire in x amount`, // plain text body
+    html: `
+        Hello there,
+        <br/>
+        <p>Hi there, use the otp ${otp} to reset the password. The password will expire in x amount</p>
+
+        <p>Kind regards</p>
+        <br/>
+        <p>--Some company info</p>
+    `, // html body
+  }
+
+  send(mailObj)
+}
