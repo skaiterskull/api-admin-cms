@@ -20,8 +20,20 @@ Router.get('/:slug?', async (req, res) => {
     let result = null
     if (slug) {
       result = await getSingleProduct({ slug })
+      if (!result) {
+        return res.json({
+          status: 'Error',
+          message: 'Product not found.',
+        })
+      }
     } else {
       result = await getProduct()
+      if (!result) {
+        return res.json({
+          status: 'Error',
+          message: 'Product not found.',
+        })
+      }
     }
 
     res.json({

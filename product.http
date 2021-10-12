@@ -25,4 +25,4 @@ Content-Type: application/json
 
 
 ### Delete product
-DELETE   http://localhost:8000/api/v1/product/
+DELETE   http://localhost:8000/api/v1/product/6164f8d0a0fbbe526d29dae0

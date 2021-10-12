@@ -43,7 +43,17 @@ All user api will follow the following endpoint `${rootUrl/api/v1/category}`
 
 All token api will follow the following endpoint `${rootUrl/api/v1/token}`
 
-| #   | API | METHOD | DESCRIPTION                                                                          |
-| --- | --- | ------ | ------------------------------------------------------------------------------------ |
-| 1   | `/` | GET    | Expect the Authorization data as headers from frontend for authorization of the user |
-| 2   | `/` | POST   | Expect an email and OTP will be sent to the email                                    |
+| #   | API | METHOD | DESCRIPTION                                                                          | isPrivate |
+| --- | --- | ------ | ------------------------------------------------------------------------------------ | --------- |
+| 1   | `/` | GET    | Expect the Authorization data as headers from frontend for authorization of the user | No        |
+| 2   | `/` | POST   | Expect an email and OTP will be sent to the email                                    | No        |
+
+### Product API
+
+All token api will follow the following endpoint `${rootUrl/api/v1/product}`
+
+| #   | API       | METHOD | DESCRIPTION                                                                     |
+| --- | --------- | ------ | ------------------------------------------------------------------------------- |
+| 1   | `/:slug?` | GET    | Fetch data, if slug provided will fetch data by slug, otherwise fetch all datas |
+| 2   | `/`       | POST   | Expect an object and save in database                                           |
+| 2   | `/params` | DELETE | Expect an id as params and delete the product by id                             |
