@@ -36,8 +36,8 @@ All user api will follow the following endpoint `${rootUrl/api/v1/category}`
 | --- | --------- | ------ | -------------------------------------------------------------------------------------------------- | --------- |
 | 1   | `/`       | POST   | Expects the category info object and creates category in DB and return stat message                | Yes       |
 | 2   | `/`       | GET    | Fetching all the data from category table                                                          | Yes       |
-| 2   | `/`       | PATCH  | Expect the category info object {\_id, name, parentCat} and based on that will update the database | Yes       |
-| 2   | `/params` | DELETE | Require the category info object {\_id} and pass it as params for deleting the data                | Yes       |
+| 3   | `/`       | PATCH  | Expect the category info object {\_id, name, parentCat} and based on that will update the database | Yes       |
+| 4   | `/params` | DELETE | Require the category info object {\_id} and pass it as params for deleting the data                | Yes       |
 
 ### Token API
 
@@ -56,4 +56,4 @@ All token api will follow the following endpoint `${rootUrl/api/v1/product}`
 | --- | --------- | ------ | ------------------------------------------------------------------------------- |
 | 1   | `/:slug?` | GET    | Fetch data, if slug provided will fetch data by slug, otherwise fetch all datas |
 | 2   | `/`       | POST   | Expect an object and save in database                                           |
-| 2   | `/params` | DELETE | Expect an id as params and delete the product by id                             |
+| 3   | `/params` | DELETE | Expect an id as params and delete the product by id                             |
