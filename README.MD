@@ -13,29 +13,31 @@ This is part of eshop system. This project is the backend api for admin cms.
 
 All the api will follow the following path `${rootUrl/api/v1}` ie. http://localhost
 
+All the private apis endpoint only be accessible if authorization header is included.
+
 ### User API
 
-All user api will follow the following endpoint `${rootUrl/api/v1/user}`
+All user api will follow the following endpoint `${rootUrl/api/v1/user}`.
 
-| #   | API                   | METHOD | DESCRIPTION                                                                 |
-| --- | --------------------- | ------ | --------------------------------------------------------------------------- |
-| 1   | `/`                   | POST   | Expect the user info object and create user in DB and return status message |
-| 2   | `/email-verification` | POST   | Expect the user info object and check if the link valid                     |
-| 3   | `/login`              | POST   | Expect an user info {email, password} and proceed to private route          |
-| 4   | `/`                   | PUT    | Expect an user info object and then update it on database                   |
-| 5   | `/`                   | PATCH  | Expect an current password and new password to update the password          |
-| 6   | `/reset-password`     | PATCH  | Expect otp, new password, and email to reset password                       |
+| #   | API                   | METHOD | DESCRIPTION                                                                 | isPrivate |
+| --- | --------------------- | ------ | --------------------------------------------------------------------------- | --------- |
+| 1   | `/`                   | POST   | Expect the user info object and create user in DB and return status message | Yes       |
+| 2   | `/email-verification` | POST   | Expect the user info object and check if the link valid                     | No        |
+| 3   | `/login`              | POST   | Expect an user info {email, password} and proceed to private route          | No        |
+| 4   | `/`                   | PUT    | Expect an user info object and then update it on database                   | Yes       |
+| 5   | `/`                   | PATCH  | Expect an current password and new password to update the password          | Yes       |
+| 6   | `/reset-password`     | PATCH  | Expect otp, new password, and email to reset password                       | No        |
 
 ### Category API
 
 All user api will follow the following endpoint `${rootUrl/api/v1/category}`
 
-| #   | API       | METHOD | DESCRIPTION                                                                                        |
-| --- | --------- | ------ | -------------------------------------------------------------------------------------------------- |
-| 1   | `/`       | POST   | Expects the category info object and creates category in DB and return stat message                |
-| 2   | `/`       | GET    | Fetching all the data from category table                                                          |
-| 2   | `/`       | PATCH  | Expect the category info object {\_id, name, parentCat} and based on that will update the database |
-| 2   | `/params` | DELETE | Require the category info object {\_id} and pass it as params for deleting the data                |
+| #   | API       | METHOD | DESCRIPTION                                                                                        | isPrivate |
+| --- | --------- | ------ | -------------------------------------------------------------------------------------------------- | --------- |
+| 1   | `/`       | POST   | Expects the category info object and creates category in DB and return stat message                | Yes       |
+| 2   | `/`       | GET    | Fetching all the data from category table                                                          | Yes       |
+| 2   | `/`       | PATCH  | Expect the category info object {\_id, name, parentCat} and based on that will update the database | Yes       |
+| 2   | `/params` | DELETE | Require the category info object {\_id} and pass it as params for deleting the data                | Yes       |
 
 ### Token API
 
