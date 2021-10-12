@@ -1,0 +1,28 @@
+### Product API
+
+### Fetch product
+GET  http://localhost:8000/api/v1/product/
+
+
+//title, status, categories, price, qty, description, salePrice, saleStartDate, saleEndDate, brand
+//slug, image 
+### Create a product
+POST http://localhost:8000/api/v1/product
+Content-Type: application/json
+
+{
+ "title": "Samsung TV",
+ "status": true,
+ "categories": "Electronic",
+ "price": 500,
+ "qty": 50,
+ "description": "Awesome TV",
+ "salePrice": 0,
+ "saleStartDate": "",
+ "saleEndDate": "",
+ "brand": "Samsung"
+}
+
+
+### Delete product
+DELETE   http://localhost:8000/api/v1/product/
