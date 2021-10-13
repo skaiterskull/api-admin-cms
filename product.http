@@ -11,16 +11,16 @@ POST http://localhost:8000/api/v1/product
 Content-Type: application/json
 
 {
- "title": "Samsung TV",
+ "title": "Apple Watch2",
  "status": true,
  "categories": "Electronic",
  "price": 500,
  "qty": 50,
- "description": "Awesome TV",
+ "description": "Great Watch",
  "salePrice": 0,
  "saleStartDate": "",
  "saleEndDate": "",
- "brand": "Samsung"
+ "brand": "Apple"
 }
 
 
