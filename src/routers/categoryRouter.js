@@ -13,7 +13,6 @@ import {
 } from '../middlewares/validation.middleware.js'
 
 Router.all('/', (req, res, next) => {
-  console.log('You have reached category API')
   next()
 })
 

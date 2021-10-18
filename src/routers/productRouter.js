@@ -10,7 +10,10 @@ import {
   updateProductById,
   deleteProductById,
 } from '../models/product/Product.model.js'
-import { newProductFormValidaton } from '../middlewares/productValidation.middleware.js'
+import {
+  newProductFormValidaton,
+  updateProductFormValidaton,
+} from '../middlewares/productValidation.middleware.js'
 
 //Get all or single products
 Router.get('/:slug?', async (req, res) => {
@@ -72,12 +75,8 @@ Router.post('/', newProductFormValidaton, async (req, res) => {
 })
 
 //Update product
-Router.put('/', async (req, res) => {
+Router.put('/', updateProductFormValidaton, async (req, res) => {
   try {
-    console.log(req.body)
-
-    //1. server side validation
-    //2. store product in the db
     const { _id, ...product } = req.body
     const result = await updateProductById(_id, product)
     if (result?._id) {
