@@ -6,6 +6,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import mongoClient from './src/config/db.js'
 const app = express()
+import path from 'path'
 
 const PORT = process.env.PORT || 8000
 
@@ -18,6 +19,10 @@ app.use(express.json())
 
 //Connect MongoDB
 mongoClient()
+
+//Serve static files from public dir
+const __dirname = path.resolve()
+app.use(express.static(path.join(__dirname, 'public')))
 
 //Routers
 import userRouter from './src/routers/userRouter.js'
