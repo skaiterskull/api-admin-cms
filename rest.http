@@ -115,3 +115,22 @@ Content-Type: application/json
 {
     "email": "hendra.here@yahoo.com"
 }
+
+
+#################################### Payment option api 
+
+### Get payment
+GET http://localhost:8000/api/v1/payment-option
+
+### Add new payment
+POST http://localhost:8000/api/v1/payment-option
+Content-Type: application/json
+
+{
+    "status" : false,
+    "name" : "Pay by Bank ID",
+    "info": "Please transfer the money PAYID"
+}
+
+### Delete payment option 
+DELETE http://localhost:8000/api/v1/payment-option/616f6eb79f4ad13c9e2b4cf1
